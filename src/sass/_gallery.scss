@@ -1,0 +1,16 @@
+.gallery {
+  margin-top: 85;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 15px;
+}
+
+.photo-card {
+  border-bottom: solid 2px rgb(196, 194, 194);
+}
+
+.load-more {
+  display: none;
+}
