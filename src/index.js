@@ -15,7 +15,7 @@ let pageCount = 1;
 async function onFormSubmit(e) {
   e.preventDefault();
 
-  searchVal = inputEl.value;
+  const searchVal = inputEl.value;
 
   if (searchedImg !== searchVal) {
     searchedImg = searchVal;
