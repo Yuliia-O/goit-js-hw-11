@@ -10,21 +10,22 @@ formEl.addEventListener('submit', onFormSubmit);
 loadBtn.addEventListener('click', onLoadClick);
 
 let searchedImg = '';
-let pageCount = 1;
+let pageCount = 2;
 
 async function onFormSubmit(e) {
   e.preventDefault();
 
-  const searchVal = inputEl.value;
-
-  if (searchedImg !== searchVal) {
-    searchedImg = searchVal;
-    pageCount = 1;
-    galleryEl.innerHTML = '';
+  if (searchedImg === inputEl.value) {
+    return;
+  } else {
+    pageCount = 2;
   }
 
-  const data = await getImage(searchVal, pageCount);
-  const images = data.hits;
+  searchedImg = inputEl.value;
+  galleryEl.innerHTML = '';
+
+  const response = await getImage(inputEl.value, 1);
+  const images = response.hits;
 
   if (images.length === 0) {
     Notify.failure(
@@ -34,14 +35,14 @@ async function onFormSubmit(e) {
 
   renderCards(images);
   loadBtn.style.display = 'block';
-  pageCount += 1;
 }
 
 async function onLoadClick() {
-  const data = await getImage(searchVal, pageCount);
+  const data = await getImage(searchedImg, pageCount);
   const images = data.hits;
 
   renderCards(images);
+
   pageCount += 1;
 }
 
